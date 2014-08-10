@@ -16,7 +16,6 @@ func ComputeHmac256(message string, secret string) string {
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
-
 func Capitalize(s string) string {
 	if s == "" {
 		return ""
