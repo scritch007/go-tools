@@ -1,42 +1,21 @@
 package tools
 
 import (
-	"io"
-	"log"
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/base64"
 	"strings"
 	"unicode"
 	"unicode/utf8"
 )
 
-var (
-	LOG_DEBUG   *log.Logger
-	LOG_INFO    *log.Logger
-	LOG_WARNING *log.Logger
-	LOG_ERROR   *log.Logger
-)
-
-func LogInit(
-	traceHandle io.Writer,
-	infoHandle io.Writer,
-	warningHandle io.Writer,
-	errorHandle io.Writer) {
-
-	LOG_DEBUG = log.New(traceHandle,
-		"DEBUG: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
-
-	LOG_INFO = log.New(infoHandle,
-		"INFO: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
-
-	LOG_WARNING = log.New(warningHandle,
-		"WARNING: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
-
-	LOG_ERROR = log.New(errorHandle,
-		"ERROR: ",
-		log.Ldate|log.Ltime|log.Lshortfile)
+func ComputeHmac256(message string, secret string) string {
+	key := []byte(secret)
+	h := hmac.New(sha256.New, key)
+	h.Write([]byte(message))
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
+
 
 func Capitalize(s string) string {
 	if s == "" {
