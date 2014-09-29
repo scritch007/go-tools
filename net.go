@@ -15,3 +15,13 @@ func GetClientAddr(r *http.Request) string {
 	}
 	return ip
 }
+
+//Look into the headers or into the Query parameters for the desired piece of information
+func GetParameter(r *http.Request, parameter string) string {
+	atoken := r.Header.Get("access_token")
+	if 0 == len(atoken) {
+		//Now look into the Query Parameters
+		atoken = r.URL.Query().Get("access_token")
+	}
+	return atoken
+}
