@@ -32,3 +32,8 @@ func JsonToGolang(in *string) (out string) {
 	}
 	return out
 }
+
+func CaseInsensitiveContains(s, substr string) bool {
+	s, substr = strings.ToUpper(s), strings.ToUpper(substr)
+	return strings.Contains(s, substr)
+}
