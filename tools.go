@@ -15,6 +15,10 @@ func ComputeHmac256(message string, secret string) string {
 	h.Write([]byte(message))
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
+func ComputeHmac256Html(message string, secret string) string {
+	t := ComputeHmac256(message, secret)
+	return strings.Replace(t, "/", "_", -1)
+}
 
 func Capitalize(s string) string {
 	if s == "" {
