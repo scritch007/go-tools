@@ -3,13 +3,14 @@ package tools
 import (
 	"io"
 	"log"
+	"os"
 )
 
 var (
-	LOG_DEBUG   *log.Logger
-	LOG_INFO    *log.Logger
-	LOG_WARNING *log.Logger
-	LOG_ERROR   *log.Logger
+	LOG_DEBUG   *log.Logger = log.New(os.Stdout, "", 0)
+	LOG_INFO    *log.Logger = log.New(os.Stdout, "", 0)
+	LOG_WARNING *log.Logger = log.New(os.Stdout, "", 0)
+	LOG_ERROR   *log.Logger = log.New(os.Stdout, "", 0)
 )
 
 func LogInit(
