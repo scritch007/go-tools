@@ -4,6 +4,7 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
+	"errors"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -40,4 +41,9 @@ func JsonToGolang(in *string) (out string) {
 func CaseInsensitiveContains(s, substr string) bool {
 	s, substr = strings.ToUpper(s), strings.ToUpper(substr)
 	return strings.Contains(s, substr)
+}
+
+func LogError(toLog string) error {
+	LOG_ERROR.Printf(toLog)
+	return errors.New(toLog)
 }
